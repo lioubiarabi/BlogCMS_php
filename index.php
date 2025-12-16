@@ -1,3 +1,13 @@
+<?php
+require 'config.php';
+$stmt = $conn->query("SELECT * FROM article");
+$infos = $stmt->fetchAll();
+
+foreach($infos as $info){
+    // You must specify the column name, e.g., 'title' or 'content'
+    echo $info['title'] . "<br>"; 
+}
+?>
 <!DOCTYPE html>
 <html data-wf-page="6577019a915bb98abc733643">
     <head>
