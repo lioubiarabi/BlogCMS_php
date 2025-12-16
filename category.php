@@ -1,6 +1,4 @@
-<?php
-require 'config.php';
-?>
+<?php require 'config.php'; ?>
 <!DOCTYPE html>
 <html data-wf-page="6577019a915bb98abc733643">
     <head>
@@ -49,35 +47,37 @@ require 'config.php';
 
 
 
-        <section class="categories-section">
+
+        <section class="blog-section">
             <div class="w-layout-blockcontainer main-container w-container">
-                <div class="home-category-list-wrapper w-dyn-list">
-                    <div role="list" class="home-category-list category-page-list w-dyn-items">
-                        <?php foreach($conn->query("SELECT * from category")->fetchAll() as $category):?>
-                        <div role="listitem" class="w-dyn-item">
-                            <a data-w-id="frenzy110" href="category.php?id=<?php echo $category['categoryId']?>" class="category-grid-item category-page-grid-item w-inline-block">
+                <div class="blog-list-wrapper w-dyn-list">
+                    <div role="list" class="blog-list w-dyn-items">
+                        <?php $id = $_GET['id'] ?? 1; foreach($conn->query("SELECT * from article where categoryId = $id")->fetchAll() as $article):?>
+
+                        <div data-w-id="82b4cc5a-07f5-97c9-ff5a-9e1cf4b69c19"
+                            style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            role="listitem"
+                            class="w-dyn-item" >
+                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.html" class="blog-list-item w-inline-block">
                                 <img
                                     alt=""
                                     src="images/post16.jpg"
-                                    class="blog-category-main-image"
+                                    class="blog-main-image"
                                 />
-                                <div class="gradient-overlay"></div>
-                                <div class="category-name"> <?php echo $category['name']?> </div>
-                                <img
-                                    src="images/readmore.png"
-                                    style="opacity: 0; transform: translate3d(0px, 60%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                    alt=""
-                                    class="blog-arrow"
-                                />
+                                <div class="blog-meta">
+                                    <div class="reading-time">5 min Read</div>
+                                    <img src="images/arrow.png" style="opacity: 0;" alt="" class="blog-meta-arrow" />
+                                </div>
+                                <h4 class="main-blog-title"><?php echo $article['title'] ?></h4>
                             </a>
                         </div>
+
                         <?php endforeach ?>
+
                     </div>
                 </div>
             </div>
         </section>
-
-
 
 
 
