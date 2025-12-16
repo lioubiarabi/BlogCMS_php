@@ -94,70 +94,26 @@ $catygories = $cat->fetchAll();
 
               <div class="latest-blog-4-col-grid-wrapper w-dyn-list">
                   <div role="list" class="latest-blog-4-col-grid w-dyn-items">
-                      <div role="listitem" class="w-dyn-item">
-                          <a
-                              data-w-id="277833fd-50dd-95f1-8892-1f7359050b3b"
-                              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                              href="singleblog.html"
-                              class="latest-blog-4-col-grid-item w-inline-block w-clearfix"
-                          >
-                              <img
-                                  alt=""
-                                  src="images/post16.jpg"
-                                  class="latest-blog-4-col-image"
-                              />
-                              <h4 class="latest-blog-4-col-title">Laugh Lounge: Comedy Capers and Chuckles</h4>
-                              <div class="latest-blog-4-col-publish-time">Dec 12, 2023</div>
-                          </a>
-                      </div>
-                      <div role="listitem" class="w-dyn-item">
-                          <a
-                              data-w-id="277833fd-50dd-95f1-8892-1f7359050b3b"
-                              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                              href="singleblog.html"
-                              class="latest-blog-4-col-grid-item w-inline-block w-clearfix"
-                          >
-                              <img
-                                  alt=""
-                                  src="images/post21.jpg"
-                                  class="latest-blog-4-col-image"
-                              />
-                              <h4 class="latest-blog-4-col-title">Oceans Unexplored: Secrets of the Deep</h4>
-                              <div class="latest-blog-4-col-publish-time">Dec 12, 2023</div>
-                          </a>
-                      </div>
-                      <div role="listitem" class="w-dyn-item">
-                          <a
-                              data-w-id="277833fd-50dd-95f1-8892-1f7359050b3b"
-                              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                              href="singleblog.html"
-                              class="latest-blog-4-col-grid-item w-inline-block w-clearfix"
-                          >
-                              <img
-                                  alt=""
-                                  src="images/post24.jpg"
-                                  class="latest-blog-4-col-image"
-                              />
-                              <h4 class="latest-blog-4-col-title">Console Corner: Exploring Gaming Platforms</h4>
-                              <div class="latest-blog-4-col-publish-time">Dec 12, 2023</div>
-                          </a>
-                      </div>
-                      <div role="listitem" class="w-dyn-item">
-                          <a
-                              data-w-id="277833fd-50dd-95f1-8892-1f7359050b3b"
-                              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                              href="singleblog.html"
-                              class="latest-blog-4-col-grid-item w-inline-block w-clearfix"
-                          >
-                              <img
-                                  alt=""
-                                  src="images/post25.jpg"
-                                  class="latest-blog-4-col-image"
-                              />
-                              <h4 class="latest-blog-4-col-title">Startup Spotlight: Unveiling Business Triumphs</h4>
-                              <div class="latest-blog-4-col-publish-time">Dec 12, 2023</div>
-                          </a>
-                      </div>
+                    <?php 
+                        foreach ($conn->query("SELECT * from article limit 4") as $article) {
+                            echo '<div role="listitem" class="w-dyn-item">
+                                    <a
+                                        data-w-id="277833fd-50dd-95f1-8892-1f7359050b3b"
+                                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                        href="singleblog.html"
+                                        class="latest-blog-4-col-grid-item w-inline-block w-clearfix"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="images/post16.jpg"
+                                            class="latest-blog-4-col-image"
+                                        />
+                                        <h4 class="latest-blog-4-col-title">'. $article['title'].'</h4>
+                                        <div class="latest-blog-4-col-publish-time">'. $article['modification_date'].'</div>
+                                    </a>
+                                </div>';
+                        }
+                    ?>
                   </div>
               </div>
 
@@ -169,7 +125,9 @@ $catygories = $cat->fetchAll();
             <div class="w-layout-blockcontainer main-container w-container">
                 <div class="blog-list-wrapper w-dyn-list">
                     <div role="list" class="blog-list w-dyn-items">
-                        <div
+                        <?php
+                            foreach ($conn->query("SELECT * from article join category on article.categoryId = category.categoryId order by modification_date desc LIMIT 3") as $article) {
+                                echo '<div
                             data-w-id="82b4cc5a-07f5-97c9-ff5a-9e1cf4b69c19"
                             style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                             role="listitem"
@@ -182,53 +140,16 @@ $catygories = $cat->fetchAll();
                                     class="blog-main-image"
                                 />
                                 <div class="blog-meta">
-                                    <div class="category-text-style">Entertainment</div>
+                                    <div class="category-text-style">'. $article['name'].'</div>
                                     <div class="reading-time">5 min Read</div>
                                     <img src="images/arrow.png" style="opacity: 0;" alt="" class="blog-meta-arrow" />
                                 </div>
-                                <h4 class="main-blog-title">Laugh Lounge: Comedy Capers and Chuckles</h4>
+                                <h4 class="main-blog-title">'. $article['title'].'</h4>
                             </a>
-                        </div>
-                        <div
-                            data-w-id="82b4cc5a-07f5-97c9-ff5a-9e1cf4b69c19"
-                            style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            role="listitem"
-                            class="w-dyn-item"
-                        >
-                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.html" class="blog-list-item w-inline-block">
-                                <img
-                                    alt=""
-                                    src="images/post21.jpg"
-                                    class="blog-main-image"
-                                />
-                                <div class="blog-meta">
-                                    <div class="category-text-style">Nature</div>
-                                    <div class="reading-time">5 min Read</div>
-                                    <img src="images/arrow.png" style="opacity: 0;" alt="" class="blog-meta-arrow" />
-                                </div>
-                                <h4 class="main-blog-title">Oceans Unexplored: Secrets of the Deep</h4>
-                            </a>
-                        </div>
-                        <div
-                            data-w-id="82b4cc5a-07f5-97c9-ff5a-9e1cf4b69c19"
-                            style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                            role="listitem"
-                            class="w-dyn-item"
-                        >
-                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.html" class="blog-list-item w-inline-block">
-                                <img
-                                    alt=""
-                                    src="images/post24.jpg"
-                                    class="blog-main-image"
-                                />
-                                <div class="blog-meta">
-                                    <div class="category-text-style">Gaming</div>
-                                    <div class="reading-time">5 min Read</div>
-                                    <img src="images/arrow.png" style="opacity: 0;" alt="" class="blog-meta-arrow" />
-                                </div>
-                                <h4 class="main-blog-title">Console Corner: Exploring Gaming Platforms</h4>
-                            </a>
-                        </div>
+                        </div>';
+                            }
+                        ?>
+                        
                     </div>
                 </div>
             </div>
@@ -264,25 +185,8 @@ $catygories = $cat->fetchAll();
                 </div>
                 <div class="tech-category-list-wrapper w-dyn-list">
                     <div role="list" class="tech-category-list w-dyn-items">
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="tech-category-item w-inline-block"
-                            >
-                                <img
-                                    alt=""
-                                    src="images/post1.jpg"
-                                    class="tech-category-image"
-                                />
-                                <div class="tech-text-box">
-                                    <h4 class="tech-category-heading">Future Forward: Technology's Evolution Unveiled</h4>
-                                    <div class="tech-category-time">December 12, 2023</div>
-                                </div>
-                                <div class="tech-overlay"></div>
-                            </a>
-                        </div>
+                        <?php foreach ($conn->query("SELECT * from article where categoryId = 1 order by modification_date desc LIMIT 6") as $article): ?>
+                        
                         <div role="listitem" class="w-dyn-item">
                             <a
                                 data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
@@ -297,174 +201,14 @@ $catygories = $cat->fetchAll();
                                     style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                                 />
                                 <div class="tech-text-box" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;">
-                                    <h4 class="tech-category-heading" style="color: rgb(0, 0, 0);">Tech Trends: Navigating the Digital Frontier</h4>
-                                    <div class="tech-category-time" style="color: rgb(0, 0, 0);">December 12, 2023</div>
+                                    <h4 class="tech-category-heading" style="color: rgb(0, 0, 0);"><?php echo $article['title']; ?></h4>
+                                    <div class="tech-category-time" style="color: rgb(0, 0, 0);"><?php echo $article['modification_date']; ?></div>
                                 </div>
                                 <div class="tech-overlay" style="opacity: 0; display: block;"></div>
                             </a>
                         </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="tech-category-item w-inline-block"
-                            >
-                                <img
-                                    alt=""
-                                    src="images/post2.jpg"
-                                    class="tech-category-image"
-                                />
-                                <div class="tech-text-box">
-                                    <h4 class="tech-category-heading">Tech Talk: Advancements in Science and Tech</h4>
-                                    <div class="tech-category-time">December 12, 2023</div>
-                                </div>
-                                <div class="tech-overlay"></div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="tech-category-item w-inline-block"
-                            >
-                                <img
-                                    alt=""
-                                    src="images/post23.jpg"
-                                    class="tech-category-image"
-                                />
-                                <div class="tech-text-box">
-                                    <h4 class="tech-category-heading">Bio Wonders: Nature's Marvels Explored</h4>
-                                    <div class="tech-category-time">December 12, 2023</div>
-                                </div>
-                                <div class="tech-overlay"></div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="tech-category-item w-inline-block"
-                            >
-                                <img
-                                    alt=""
-                                    src="images/post12.jpg"
-                                    class="tech-category-image"
-                                />
-                                <div class="tech-text-box">
-                                    <h4 class="tech-category-heading">Lab Diaries: Cutting-edge Scientific Discoveries</h4>
-                                    <div class="tech-category-time">December 12, 2023</div>
-                                </div>
-                                <div class="tech-overlay"></div>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="tech-category-item w-inline-block"
-                            >
-                                <img
-                                    alt=""
-                                    src="images/post16.jpg"
-                                    class="tech-category-image"
-                                />
-                                <div class="tech-text-box">
-                                    <h4 class="tech-category-heading">Cosmic Curiosities: Exploring the Universe</h4>
-                                    <div class="tech-category-time">December 12, 2023</div>
-                                </div>
-                                <div class="tech-overlay"></div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="education-category-section">
-            <div class="w-layout-blockcontainer main-container w-container">
-                <div class="main-title">
-                    <h2 class="main-title-heading">education</h2>
-                    <div class="main-subtitle">latest news about technology</div>
-                </div>
-
-                <div id="w-node-_9cd442b5-de66-2bb7-b333-bbce06bf2e44-bc733643" class="w-layout-layout education-category-stack wf-layout-layout">
-                    <div
-                        id="w-node-_9cd442b5-de66-2bb7-b333-bbce06bf2e45-bc733643"
-                        data-w-id="9cd442b5-de66-2bb7-b333-bbce06bf2e45"
-                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="w-layout-cell single-education-post"
-                    >
-                        <div class="single-education-wrapper w-dyn-list">
-                            <div role="list" class="single-education-list w-dyn-items">
-                                <div role="listitem" class="w-dyn-item">
-                                    <a href="singleblog.html" class="single-education-item w-inline-block">
-                                        <img
-                                            alt=""
-                                            src="images/post11.jpg"
-                                            class="single-education-image"
-                                        />
-                                        <div class="single-education-text-box"><h2 class="single-education-heading">Beyond Books: Practical Learning Adventures</h2></div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div
-                        id="w-node-_9cd442b5-de66-2bb7-b333-bbce06bf2e46-bc733643"
-                        data-w-id="9cd442b5-de66-2bb7-b333-bbce06bf2e46"
-                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="w-layout-cell multi-education-blog-posts"
-                    >
-                        <div class="multi-education-list-wrapper w-dyn-list">
-                            <div role="list" class="multi-education-list w-dyn-items">
-                                <div role="listitem" class="w-dyn-item">
-                                    <a href="singleblog.html" class="multi-education-list-item w-inline-block">
-                                        <img
-                                            alt=""
-                                            src="images/post19.jpg"
-                                            class="education-category-img"
-                                        />
-                                        <h4 class="multi-education-heading">Teacher's Toolbox: Strategies for Success</h4>
-                                    </a>
-                                </div>
-                                <div role="listitem" class="w-dyn-item">
-                                    <a href="singleblog.html" class="multi-education-list-item w-inline-block">
-                                        <img
-                                            alt=""
-                                            src="images/post1.jpg"
-                                            class="education-category-img"
-                                        />
-                                        <h4 class="multi-education-heading">EdTech Explorations: Transformative Tools</h4>
-                                    </a>
-                                </div>
-                                <div role="listitem" class="w-dyn-item">
-                                    <a href="singleblog.html" class="multi-education-list-item w-inline-block">
-                                        <img
-                                            alt=""
-                                            src="images/post19.jpg"
-                                            class="education-category-img"
-                                        />
-                                        <h4 class="multi-education-heading">Student Chronicles: Life in the Academic Lane</h4>
-                                    </a>
-                                </div>
-                                <div role="listitem" class="w-dyn-item">
-                                    <a href="singleblog.html" class="multi-education-list-item w-inline-block">
-                                        <img
-                                            alt=""
-                                            src="images/post11.jpg"
-                                            class="education-category-img"
-                                        />
-                                        <h4 class="multi-education-heading">Knowledge Quest: Exploring Academic Frontiers</h4>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach ?>
                     </div>
                 </div>
             </div>
@@ -479,74 +223,28 @@ $catygories = $cat->fetchAll();
                 </div>
                 <div class="mixed-blog-list-wrapper w-dyn-list">
                     <div role="list" class="mixed-blog-list w-dyn-items">
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="af1b559a-bf35-577f-2fd1-dcae59a77d94"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="mixed-blog-item w-inline-block"
-                            >
-                                <div class="mixed-overlay"></div>
-                                <img
-                                    alt=""
-                                    src="images/post9.jpg"
-                                    class="mixed-img"
-                                />
-                                <div class="mixed-blog-category">Travel</div>
-                                <h4 class="mixed-blog-heading">Cultural Delights: A Journey Through History</h4>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="af1b559a-bf35-577f-2fd1-dcae59a77d94"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="mixed-blog-item w-inline-block"
-                            >
-                                <div class="mixed-overlay"></div>
-                                <img
-                                    alt=""
-                                    src="images/post7.jpg"
-                                    class="mixed-img"
-                                />
-                                <div class="mixed-blog-category">Nature</div>
-                                <h4 class="mixed-blog-heading">Wild Wonders: Exploring Nature's Tapestry</h4>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="af1b559a-bf35-577f-2fd1-dcae59a77d94"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="mixed-blog-item w-inline-block"
-                            >
-                                <div class="mixed-overlay"></div>
-                                <img
-                                    alt=""
-                                    src="images/post6.jpg"
-                                    class="mixed-img"
-                                />
-                                <div class="mixed-blog-category">Entertainment</div>
-                                <h4 class="mixed-blog-heading">Pop Culture Parade: Trends and Fandoms</h4>
-                            </a>
-                        </div>
-                        <div role="listitem" class="w-dyn-item">
-                            <a
-                                data-w-id="af1b559a-bf35-577f-2fd1-dcae59a77d94"
-                                style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
-                                class="mixed-blog-item w-inline-block"
-                            >
-                                <div class="mixed-overlay"></div>
-                                <img
-                                    alt=""
-                                    src="images/post5.jpg"
-                                    class="mixed-img"
-                                />
-                                <div class="mixed-blog-category">Business</div>
-                                <h4 class="mixed-blog-heading">Entrepreneurial Insights: Building Success Stories</h4>
-                            </a>
-                        </div>
+                    <?php
+                        foreach ($conn->query("SELECT * from article join category on article.categoryId = category.categoryId order by modification_date desc LIMIT 4") as $article) {
+                            echo '<div role="listitem" class="w-dyn-item">
+                                <a
+                                    data-w-id="af1b559a-bf35-577f-2fd1-dcae59a77d94"
+                                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                    href="singleblog.html"
+                                    class="mixed-blog-item w-inline-block"
+                                >
+                                    <div class="mixed-overlay"></div>
+                                    <img
+                                        alt=""
+                                        src="images/post9.jpg"
+                                        class="mixed-img"
+                                    />
+                                    <div class="mixed-blog-category">'.$article['name'].'</div>
+                                    <h4 class="mixed-blog-heading">'.$article['title'].'</h4>
+                                </a>
+                            </div>';
+                        }
+                    ?>
+                        
                     </div>
                 </div>
             </div>
