@@ -1,3 +1,6 @@
+<?php
+require 'config.php';
+?>
 <!DOCTYPE html>
 <html data-wf-page="6577019a915bb98abc733643">
     <head>
@@ -80,54 +83,21 @@
                     <div id="frenzy102" class="w-layout-cell author-cell">
                         <div class="author-list-wrapper w-dyn-list">
                             <div role="list" class="author-list w-dyn-items">
+                                <?php foreach($conn->query("SELECT * from user where auther = 1")->fetchAll() as $author): ?>
                                 <div role="listitem" class="w-dyn-item">
                                     <div class="author-item">
                                         <div class="author-item-upper">
                                             <img alt="" loading="lazy" src="images/author1.jpg" class="author-image" />
                                             <a href="author.html" class="button author-button w-button">profile</a>
                                         </div>
-                                        <h5 class="author-name">Demetris Osinski</h5>
+                                        <h5 class="author-name"><?php echo $author['name'] ?></h5>
                                         <p class="author-bio">
                                             A dedicated environmentalist, Alex sheds light on pressing ecological issues and sustainability practices. His articles inspire action and offer practical insights for a greener future.
                                         </p>
                                     </div>
                                 </div>
-                                <div role="listitem" class="w-dyn-item">
-                                    <div class="author-item">
-                                        <div class="author-item-upper">
-                                            <img alt="" loading="lazy" src="images/author2.jpg" class="author-image" />
-                                            <a href="author.html" class="button author-button w-button">profile</a>
-                                        </div>
-                                        <h5 class="author-name">Alex Carter</h5>
-                                        <p class="author-bio">
-                                            A dedicated environmentalist, Alex sheds light on pressing ecological issues and sustainability practices. His articles inspire action and offer practical insights for a greener future.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div role="listitem" class="w-dyn-item">
-                                    <div class="author-item">
-                                        <div class="author-item-upper">
-                                            <img alt="" loading="lazy" src="images/author3.jpg" class="author-image" />
-                                            <a href="author.html" class="button author-button w-button">profile</a>
-                                        </div>
-                                        <h5 class="author-name">Liam Nison</h5>
-                                        <p class="author-bio">
-                                            A dedicated environmentalist, Alex sheds light on pressing ecological issues and sustainability practices. His articles inspire action and offer practical insights for a greener future.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div role="listitem" class="w-dyn-item">
-                                    <div class="author-item">
-                                        <div class="author-item-upper">
-                                            <img alt="" loading="lazy" src="images/author4.jpg" class="author-image" />
-                                            <a href="author.html" class="button author-button w-button">profile</a>
-                                        </div>
-                                        <h5 class="author-name">Mike Ivans</h5>
-                                        <p class="author-bio">
-                                            A dedicated environmentalist, Alex sheds light on pressing ecological issues and sustainability practices. His articles inspire action and offer practical insights for a greener future.
-                                        </p>
-                                    </div>
-                                </div>
+                                <?php endforeach?>
+                                
                             </div>
                         </div>
                     </div>
