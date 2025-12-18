@@ -83,7 +83,7 @@ require 'config.php';
                     <div id="frenzy102" class="w-layout-cell author-cell">
                         <div class="author-list-wrapper w-dyn-list">
                             <div role="list" class="author-list w-dyn-items">
-                                <?php foreach($conn->query("SELECT * from user where auther = 1")->fetchAll() as $author): ?>
+                                <?php foreach($conn->query("SELECT * from user where autheshowr = 1")->fetchAll() as $author): ?>
                                 <div role="listitem" class="w-dyn-item">
                                     <div class="author-item">
                                         <div class="author-item-upper">
