@@ -453,7 +453,7 @@ $articles = $conn->query("SELECT article.*, category.name AS category_name FROM 
 
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                    <a href="delete_article.php?id=<?= $row['articleId'] ?>" class="btn btn-sm btn-danger">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
