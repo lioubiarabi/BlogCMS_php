@@ -1,3 +1,20 @@
+<?php 
+require 'config.php';
+
+$id = $_GET['id'] ?? null;
+
+if(!$id) {
+    echo "Article not found!";
+    exit;
+}
+
+$article = $conn->query("SELECT * from article where articleId = $id")->fetch();
+
+if(!$article) {
+    echo "Article not found!";
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html data-wf-page="6577019a915bb98abc733643">
     <head>
@@ -56,58 +73,8 @@
                                 class="blog-image"
                             />
                             <div class="single-blog-inner">
-                                <h2 class="signle-post-title">A Beginner&#x27;s Journey to Learning Spanish: Mastering Basics and Beyond</h2>
-                                <p class="single-post-paragraph">
-                                    Hola! Welcome to the beautiful world of learning Spanish. Whether you&#x27;re drawn in by its melodious sound or enticed by the prospect of connecting with millions of Spanish speakers worldwide,
-                                    embarking on this linguistic journey can be both exciting and rewarding.
-                                </p>
-                                <blockquote class="block-quote">
-                                    <strong>
-                                        No hay que tener miedo a perder el tiempo en <br />
-                                        aprender.
-                                    </strong>
-                                    <br />
-                                    <span class="text-span">- Baltasar Gracián</span>
-                                </blockquote>
-                                <h4 class="single-post-subtitle">Embracing the Basics</h4>
-                                <p class="single-post-paragraph">
-                                    Before diving into the complexities, it&#x27;s crucial to acquaint yourself with the building blocks of the language. Begin with greetings, basic phrases, and essential vocabulary. Platforms like
-                                    Duolingo, Babbel, or Rosetta Stone offer engaging exercises that make learning these fundamentals enjoyable.<br />
-                                    <br />
-                                    Grammar might seem daunting, but fear not! Understanding basic sentence structures, verb conjugations, and noun genders lays a sturdy foundation. Online resources, textbooks, and YouTube tutorials are
-                                    fantastic aids for grasping grammar intricacies.<br />
-                                    <br />
-                                    Immerse yourself in the language by listening to podcasts, watching Spanish shows or movies, and engaging in conversation with native speakers if possible. Practice speaking aloud, even if it&#x27;s just
-                                    to yourself; it helps to solidify pronunciation and confidence.
-                                </p>
-                                <div class="single-post-lower-images">
-                                    <img
-                                        src="images/post8.jpg"                                     
-                                        alt=""
-                                        class="single-post-lower-image"
-                                    />
-                                    <img
-                                        src="images/post11.jpg"                                        
-                                        alt=""
-                                        class="single-post-lower-image"
-                                    />
-                                    <img
-                                        src="images/post13.jpg"                                        
-                                        alt=""
-                                        class="single-post-lower-image"
-                                    />
-                                </div>
-                                <h4 class="single-post-subtitle">Progressing Beyond the Basics</h4>
-                                <p class="single-post-paragraph">
-                                    Pick up beginner-level books, articles, or children&#x27;s stories in Spanish. Reading exposes you to new words, sentence structures, and cultural nuances. Don&#x27;t fret about understanding every word;
-                                    context is your friend.<br />
-                                    <br />
-                                    Start simple—keep a journal, write short paragraphs, or participate in language exchange forums online. Writing regularly enhances your grasp of grammar and vocabulary while allowing you to express
-                                    yourself creatively.<br />
-                                    <br />
-                                    Delve into Spanish culture through music, cuisine, art, and traditions. Explore Spanish-speaking countries virtually or in person, if feasible. Understanding cultural nuances adds depth and authenticity
-                                    to your language learning journey.
-                                </p>
+                                <h2 class="signle-post-title"><?php echo $article['title']; ?></h2>
+                                <?php echo $article['content']; ?>
                                 <div class="single-post-tags">
                                     <a href="#" class="taks-link single-tags">art</a>
                                     <a href="#" class="taks-link single-tags">internet</a>
@@ -118,8 +85,8 @@
                                         <div class="author-infos w-clearfix">
                                             <img src="images/author.png" alt="" class="author-img" />
                                             <div class="author-name-box">
-                                                <h4 class="author-name">Jack Thompson</h4>
-                                                <div class="author-job">Editor</div>
+                                                <h4 class="author-name"><?php echo $article['username']; ?></h4>
+                                                <div class="author-job">Author</div>
                                             </div>
                                         </div>
                                         <div class="author-socials">
