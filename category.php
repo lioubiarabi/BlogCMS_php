@@ -58,7 +58,7 @@
                             style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                             role="listitem"
                             class="w-dyn-item" >
-                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.html" class="blog-list-item w-inline-block">
+                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.php?id=<?php echo $article['articleId']; ?>" class="blog-list-item w-inline-block">
                                 <img
                                     alt=""
                                     src="images/post16.jpg"
