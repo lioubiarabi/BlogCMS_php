@@ -1,3 +1,27 @@
+<?php
+session_start();
+require '../config.php';
+
+if (isset($_SESSION['username'])) {
+    echo "Welcome back, " . $_SESSION['username'];
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            $stmt = $conn->prepare("INSERT INTO article(title, content, creation_date, modification_date, categoryId, username, status) VALUES(?, ?, NOW(), NOW(), ?, ?, ?)");
+            $stmt->execute([$_POST['title'], $_POST['content'], $_POST['category'],$_SESSION['username'], isset($_POST['publish']) ? 'published' : 'archived' ]);
+
+            echo "<script>alert('Article Posted Successfully'); window.location='index.html';</script>";
+        } catch (\Throwable $e) {
+            echo 'error: ' . $e->getMessage();
+            exit;
+        }
+    };
+
+} else {
+    echo "You are not logged in.";
+    header('location auth-login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -411,7 +435,7 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form">
+                                        <form class="form" method="post" action="">
                                             <div class="row">
                                                 <!-- Title -->
                                                 <div class="col-12">
@@ -422,25 +446,16 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Slug -->
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="slug">Slug (URL)</label>
-                                                        <input type="text" id="slug" class="form-control"
-                                                            placeholder="my-new-article" name="slug">
-                                                    </div>
-                                                </div>
 
                                                 <!-- Category -->
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="category">Category</label>
                                                         <select class="form-select" id="category" name="category">
-                                                            <option>Select Category</option>
-                                                            <option>Technology</option>
-                                                            <option>Lifestyle</option>
-                                                            <option>Finance</option>
-                                                            <option>Health</option>
+                                                            <option disabled selected>Select a Category</option>
+                                                            <?php foreach ($conn->query("SELECT * from category")->fetchAll() as $cat): ?>
+                                                                <option value="<?= $cat['categoryId'] ?>"><?= $cat['name'] ?></option>
+                                                            <?php endforeach ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -450,41 +465,23 @@
                                                     <div class="form-group">
                                                         <label for="author">Author</label>
                                                         <input type="text" id="author" class="form-control"
-                                                            placeholder="Author Name" name="author" value="Admin User">
+                                                            placeholder="Author Name" name="author" value="<?php echo $_SESSION['username']; ?>" disabled>
                                                     </div>
                                                 </div>
-
-                                                <!-- Publish Date -->
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="date">Publication Date</label>
-                                                        <input type="date" id="date" class="form-control" name="date">
-                                                    </div>
-                                                </div>
-
                                                 <!-- Featured Image -->
-                                                <div class="col-12">
+                                                <!--                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="formFile" class="form-label">Featured Image</label>
                                                         <input class="form-control" type="file" id="formFile">
                                                         <small class="text-muted">Recommended size: 1200x630px</small>
                                                     </div>
-                                                </div>
-
-                                                <!-- Short Excerpt -->
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="excerpt">Excerpt / Summary</label>
-                                                        <textarea class="form-control" id="excerpt" rows="3"
-                                                            placeholder="Brief summary of the article..."></textarea>
-                                                    </div>
-                                                </div>
+                                                </div> -->
 
                                                 <!-- Main Content -->
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="content">Content</label>
-                                                        <textarea class="form-control" id="content" rows="10"
+                                                        <textarea class="form-control" name="content" id="content" rows="10"
                                                             placeholder="Write your article here..."></textarea>
                                                     </div>
                                                 </div>
@@ -493,25 +490,17 @@
                                                 <div class="col-12 mt-2">
                                                     <div class="form-group">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
+                                                            <input class="form-check-input" name="publish" type="checkbox"
                                                                 id="flexSwitchCheckChecked" checked>
                                                             <label class="form-check-label"
-                                                                for="flexSwitchCheckChecked">Enable Comments</label>
-                                                        </div>
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="featurePost">
-                                                            <label class="form-check-label" for="featurePost">Pin to
-                                                                Homepage (Featured)</label>
+                                                                for="flexSwitchCheckChecked">Publish</label>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <!-- Buttons -->
                                                 <div class="col-12 d-flex justify-content-end mt-3">
-                                                    <button type="button" class="btn btn-light-secondary me-2 mb-1">Save
-                                                        Draft</button>
-                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Publish
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Save
                                                         Article</button>
                                                 </div>
                                             </div>
