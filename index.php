@@ -100,7 +100,7 @@ $catygories = $cat->fetchAll();
                                     <a
                                         data-w-id="277833fd-50dd-95f1-8892-1f7359050b3b"
                                         style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                        href="singleblog.html"
+                                        href="singleblog.php?id=' . $article['articleId'] . '"
                                         class="latest-blog-4-col-grid-item w-inline-block w-clearfix"
                                     >
                                         <img
@@ -133,7 +133,7 @@ $catygories = $cat->fetchAll();
                             role="listitem"
                             class="w-dyn-item"
                         >
-                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.html" class="blog-list-item w-inline-block">
+                            <a data-w-id="8251edd9-9261-4de3-6c77-dd69fe9ce26a" href="singleblog.php?id=' . $article['articleId'] . '" class="blog-list-item w-inline-block">
                                 <img
                                     alt=""
                                     src="images/post16.jpg"
@@ -191,7 +191,7 @@ $catygories = $cat->fetchAll();
                             <a
                                 data-w-id="e42a7868-a1ff-3fab-a88f-530c4a479735"
                                 style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                href="singleblog.html"
+                                href="singleblog.php?id=<?php echo $article['articleId'];?>"
                                 class="tech-category-item w-inline-block"
                             >
                                 <img
@@ -229,7 +229,7 @@ $catygories = $cat->fetchAll();
                                 <a
                                     data-w-id="af1b559a-bf35-577f-2fd1-dcae59a77d94"
                                     style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                                    href="singleblog.html"
+                                    href="singleblog.php?id=' . $article['articleId'] . '"
                                     class="mixed-blog-item w-inline-block"
                                 >
                                     <div class="mixed-overlay"></div>
